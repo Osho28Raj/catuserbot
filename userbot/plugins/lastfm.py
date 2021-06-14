@@ -203,7 +203,7 @@ async def last_fm(lastFM):
     else:
         await lastFM.edit(f"{output}", parse_mode="md")
 
-
+"""
 @catub.cat_cmd(
     pattern="now$",
     command=("now", plugin_category),
@@ -221,7 +221,7 @@ async def now(event):
     text = deEmojify(text)
     await event.delete()
     await hide_inlinebot(event.client, bot_name, text, event.chat_id, reply_to_id)
-
+"""
 
 @catub.cat_cmd(
     pattern="inow$",
