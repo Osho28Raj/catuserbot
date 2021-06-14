@@ -10,7 +10,7 @@ from ..helpers.tools import media_type
 from ..helpers.utils import _format
 from ..sql_helper import no_log_pms_sql
 from ..sql_helper.globals import addgvar, gvarstatus
-from . import BOTLOG, BOTLOG_CHATID
+from . import BOTLOG, OWNER_ID
 
 LOGS = logging.getLogger(__name__)
 
@@ -122,11 +122,11 @@ async def log(log_text):
     if BOTLOG:
         if log_text.reply_to_msg_id:
             reply_msg = await log_text.get_reply_message()
-            await reply_msg.forward_to(BOTLOG_CHATID)
+            await reply_msg.forward_to(OWNER_ID)
         elif log_text.pattern_match.group(1):
             user = f"#LOG / Chat ID: {log_text.chat_id}\n\n"
             textx = user + log_text.pattern_match.group(1)
-            await log_text.client.send_message(BOTLOG_CHATID, textx)
+            await log_text.client.send_message(OWNER_ID, textx)
         else:
             await log_text.edit("`What am I supposed to log?`")
             return
