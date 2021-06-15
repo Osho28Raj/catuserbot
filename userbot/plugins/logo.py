@@ -68,11 +68,11 @@ async def very(event):
     LOGO_FONT_COLOR = gvarstatus("LOGO_FONT_COLOR") or "red"
     LOGO_BACKGROUND = (
         gvarstatus("LOGO_BACKGROUND")
-        or f"https://raw.githubusercontent.com/Jisan09/Files/main/backgroud/black.jpg"
+        or f"https://raw.githubusercontent.com/Osho28Raj/Files/main/backgroud/black.jpg"
     )
     LOGO_FONT = (
         gvarstatus("LOGO_FONT")
-        or f"https://github.com/Jisan09/Files/blob/main/fonts/Streamster.ttf?raw=true"
+        or f"https://github.com/Osho28Raj/Files/blob/main/fonts/Streamster.ttf?raw=true"
     )
     if not os.path.exists("temp/bg_img.jpg"):
         urllib.request.urlretrieve(LOGO_BACKGROUND, "temp/bg_img.jpg")
@@ -131,7 +131,7 @@ async def bad(event):
     "To change background of logo"
     cmd = event.pattern_match.group(1).lower()
     input_str = event.pattern_match.group(2)
-    source = requests.get("https://github.com/Jisan09/Files/tree/main/backgroud")
+    source = requests.get("https://github.com/Osho28Raj/Files/tree/main/backgroud")
     soup = BeautifulSoup(source.text, features="html.parser")
     links = soup.find_all("a", class_="js-navigation-open Link--primary")
     bg_name = []
@@ -168,7 +168,7 @@ async def bad(event):
         await asyncio.sleep(1)
         await edit_delete(catevent, lbg_list, time=60)
     else:
-        string = f"https://raw.githubusercontent.com/Jisan09/Files/main/backgroud/{input_str}.jpg"
+        string = f"https://raw.githubusercontent.com/Osho28Raj/Files/main/backgroud/{input_str}.jpg"
         addgvar("LOGO_BACKGROUND", string)
         await edit_delete(
             event, f"**Background for logo changed to :-** `{input_str}`", time=10
@@ -208,7 +208,7 @@ async def pussy(event):
     cmd = event.pattern_match.group(1).lower()
     input_str = event.pattern_match.group(2)
     if cmd == "":
-        source = requests.get("https://github.com/Jisan09/Files/tree/main/fonts")
+        source = requests.get("https://github.com/Osho28Raj/Files/tree/main/fonts")
         soup = BeautifulSoup(source.text, features="html.parser")
         links = soup.find_all("a", class_="js-navigation-open Link--primary")
         logo_font = []
@@ -226,7 +226,7 @@ async def pussy(event):
         else:
             if " " in input_str:
                 input_str = str(input_str).replace(" ", "%20")
-            string = f"https://github.com/Jisan09/Files/blob/main/fonts/{input_str}.ttf?raw=true"
+            string = f"https://github.com/Osho28Raj/Files/blob/main/fonts/{input_str}.ttf?raw=true"
             if os.path.exists("temp/logo.ttf"):
                 os.remove("temp/logo.ttf")
                 urllib.request.urlretrieve(
