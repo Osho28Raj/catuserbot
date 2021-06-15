@@ -1,5 +1,5 @@
 FROM sandy1709/catuserbot:latest
-#just for fun
+
 #clonning repo 
 RUN git clone https://github.com/Jisan09/catuserbot.git /root/userbot
 #working directory 
