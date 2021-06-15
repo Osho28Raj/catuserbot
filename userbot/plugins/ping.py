@@ -13,11 +13,11 @@ from userbot import catub
 from ..core.managers import edit_or_reply
 from ..sql_helper.globals import gvarstatus
 from . import catub, hmention, reply_id
-
+from ..helpers.functions import check_data_base_heal_th
 plugin_category = "tools"
 
 # =========Some integrated custom vars============
-
+_, check_sgnirts = check_data_base_heal_th()
 # add space b/w each telegraph link
 PING_PICS = (
     gvarstatus("PING_PICS")
