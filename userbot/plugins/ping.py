@@ -17,13 +17,6 @@ from . import catub, hmention, reply_id
 plugin_category = "tools"
 
 # =========Some integrated custom vars============
-
-# add space b/w each telegraph link
-PING_PICS = (
-    gvarstatus("PING_PICS")
-    or "https://telegra.ph/file/1328d62db93ad22b69ba2.jpg https://telegra.ph/file/b2da6e4c55dd29600e4ed.jpg"
-)
-PING_PICS = PING_PICS.rsplit(" ")
 # Pre text i.e. before calculation ping
 PING_TEXT = os.environ.get("PING_TEXT") or "𝔖𝔱𝔞𝔯𝔱𝔦𝔫𝔤 𝔗𝔥𝔢 𝔊𝔞𝔪𝔢!!"
 # Post text i.e. the final message
@@ -162,6 +155,9 @@ async def _(event):
     if event.fwd_from:
         return
     reply_to_id = await reply_id(event)
+    # add space b/w each telegraph link
+    PING_PICS = (gvarstatus("PING_PICS") or "https://telegra.ph/file/1328d62db93ad22b69ba2.jpg https://telegra.ph/file/b2da6e4c55dd29600e4ed.jpg")
+    PING_PICS = PING_PICS.rsplit(" ")
     start = datetime.now()
     cat = await edit_or_reply(event, f"{PING_TEXT}", "html")
     end = datetime.now()
