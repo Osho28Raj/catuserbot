@@ -20,7 +20,6 @@ plugin_category = "extra"
 )
 async def hideit01(event):
     "Hide your message through @HideitBot"
-    await event.delete()
     if event.fwd_from:
         return
     bot = "@hideitbot"
@@ -30,6 +29,7 @@ async def hideit01(event):
         return await edit_delete(
             event, "__What should I hide through bot? Give some text.__"
         )
+    await event.delete()
     results = await event.client.inline_query(bot, hidetxt)
     await results[0].click(event.chat_id, reply_to=reply_to_id)
 
@@ -46,7 +46,6 @@ async def hideit01(event):
 )
 async def hideit02(event):
     "Hide your message through @HideitBot"
-    await event.delete()
     if event.fwd_from:
         return
     bot = "@hideitbot"
@@ -56,5 +55,6 @@ async def hideit02(event):
         return await edit_delete(
             event, "__What should I hide through bot? Give some text.__"
         )
+    await event.delete()
     results = await event.client.inline_query(bot, hidetxt)
     await results[1].click(event.chat_id, reply_to=reply_to_id)

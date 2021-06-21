@@ -20,7 +20,6 @@ plugin_category = "extra"
 )
 async def GayIfUChangeCredit(event):
     "Bullies the victim"
-    await event.delete()
     if event.fwd_from:
         return
     bot = "@FsInChatBot"
@@ -30,5 +29,6 @@ async def GayIfUChangeCredit(event):
         return await edit_delete(
             event, "__How should I bulli without text.__"
         )
+    await event.delete()
     results = await event.client.inline_query(bot, hidetxt)
     await results[0].click(event.chat_id, reply_to=reply_to_id)
