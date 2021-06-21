@@ -1,4 +1,5 @@
 # Made by @o_s_h_o_r_a_j
+# Change credit and you gay.
 from userbot import catub
 
 from ..core.managers import edit_delete
@@ -17,8 +18,8 @@ plugin_category = "extra"
         ],
     },
 )
-async def hideit01(event):
-    "Bullies the victim "
+async def GayIfUChangeCredit(event):
+    "Bullies the victim"
     await event.delete()
     if event.fwd_from:
         return
@@ -31,4 +32,3 @@ async def hideit01(event):
         )
     results = await event.client.inline_query(bot, hidetxt)
     await results[0].click(event.chat_id, reply_to=reply_to_id)
-

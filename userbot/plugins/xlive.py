@@ -17,7 +17,7 @@ from ..core.managers import edit_or_reply
 from ..helpers.functions import catalive, check_data_base_heal_th, get_readable_time
 from ..helpers.utils import reply_id
 from ..sql_helper.globals import gvarstatus
-from . import StartTime, catub, catversion, mention
+from . import StartTime, catub, catversion, hmention
 
 plugin_category = "utils"
 
@@ -49,12 +49,14 @@ async def amireallyalive(event):
     except Exception:
         response = None
     quote = response["quote"]
+    """
     error = "You rise with the moon. I rise with the sun."
     if error in quote:
         try:
             response = requests.get(api_url).json()
         except Exception:
             response = None
+    """
     quote = response["quote"]
     name = response["character"]
     ANIME_QUOTE = f"{quote}\n                    -{name}"
@@ -66,35 +68,35 @@ async def amireallyalive(event):
         CAT = [x for x in CAT_IMG.split()]
         A_IMG = list(CAT)
         PIC = random.choice(A_IMG)
-        cat_caption = f"**__{ALIVE_TEXT}__**\n\n"
-        cat_caption += f"**{EMOJI} 👑 Owner : {mention}**\n"
-        cat_caption += f"**{EMOJI} 😪 Not Slept For :** `{uptime}`\n"
+        cat_caption = f"<b><i>{ALIVE_TEXT}</i></b>\n\n"
+        cat_caption += f"<b>{EMOJI} 👑 Owner : {hmention}</b>\n"
+        cat_caption += f"<b>{EMOJI} 😪 Not Slept For :</b> <code>{uptime}</code>\n"
         end = datetime.now()
         ms = (end - start).microseconds / 1000
-        cat_caption += f"**{EMOJI} 🥱 Lazyness :** `{ms} ms`\n"
-        cat_caption += f"**{EMOJI} 🐱 Evolution :** `{catversion}`\n"
-        cat_caption += f"**{EMOJI} 💻 Storage :** `{check_sgnirts}`\n\n"
+        cat_caption += f"<b>{EMOJI} 🥱 Lazyness :</b> <code>{ms} ms</code>\n"
+        cat_caption += f"<b>{EMOJI} 🐱 Evolution :</b> <code>{catversion}</code>\n"
+        cat_caption += f"<b>{EMOJI} 💻 Storage :</b> <code>{check_sgnirts}</code>\n\n"
         try:
             await event.client.send_file(
-                event.chat_id, PIC, caption=cat_caption, reply_to=reply_to_id
+                event.chat_id, PIC, caption=cat_caption, reply_to=reply_to_id, parse_mode = "html"
             )
             await event.delete()
         except (WebpageMediaEmptyError, MediaEmptyError, WebpageCurlFailedError):
             return await edit_or_reply(
                 event,
-                f"**Media Value Error!!**\n__Change the link by __`.setdv`\n\n**__Can't get media from this link :-**__ `{PIC}`",
+                f"<b>Media Value Error!!</b>\n<i>Change the link by </i><code>.setdv</code>\n\n<b><i>Can't get media from this link :-</b></i> <code>{PIC}</code>",
             )
     else:
         end = datetime.now()
         ms = (end - start).microseconds / 1000
         await edit_or_reply(
             event,
-            f"**{ALIVE_TEXT}**\n\n"
-            f"**✘ 👑 Owner : {mention}**\n"
-            f"**{EMOJI} 😪 Not Slept For :** `{uptime}`\n"
-            f"**{EMOJI} 🥱 Lazyness :** `{ms} ms`\n"
-            f"**{EMOJI} 🐱 Evolution :** `{catversion}`\n"
-            f"**{EMOJI} 💻 Storage :** `{check_sgnirts}`\n\n"
+            f"<b><i>{ALIVE_TEXT}</i></b>\n\n"
+            f"<b>✘ 👑 Owner : {hmention}</b>\n"
+            f"<b>{EMOJI} 😪 Not Slept For :</b> <code>{uptime}</code>\n"
+            f"<b>{EMOJI} 🥱 Lazyness :</b> <code>{ms} ms</code>\n"
+            f"<b>{EMOJI} 🐱 Evolution :</b> <code>{catversion}</code>\n"
+            f"<b>{EMOJI} 💻 Storage :</b> <code>{check_sgnirts}</code>\n\n"
         )
 
 
