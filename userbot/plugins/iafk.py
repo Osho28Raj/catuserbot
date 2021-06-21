@@ -1,5 +1,5 @@
 # THIS PLUGIN NOT TO BE ABUSED
-# 
+# Modified by https://t.me/o_s_h_o_r_a_j
 import asyncio
 from datetime import datetime
 
