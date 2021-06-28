@@ -1,3 +1,6 @@
+#=========NO REMOVAL OF CREDITS==============
+# Made by https://t.me/o_s_h_o_r_a_j
+
 import random
 import requests
 import re
