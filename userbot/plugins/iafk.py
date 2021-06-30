@@ -1,3 +1,5 @@
+# THIS PLUGIN NOT TO BE ABUSED
+# Modified by https://t.me/o_s_h_o_r_a_j
 import asyncio
 from datetime import datetime
 
@@ -53,16 +55,17 @@ async def set_not_afk(event):
         endtime = ""
         if d > 0:
             endtime += f"{d}d {h}h {m}m {s}s"
+        elif h > 0:
+            endtime += f"{h}h {m}m {s}s"
         else:
-            if h > 0:
-                endtime += f"{h}h {m}m {s}s"
-            else:
-                endtime += f"{m}m {s}s" if m > 0 else f"{s}s"
+            endtime += f"{m}m {s}s" if m > 0 else f"{s}s"
     current_message = event.message.message
-    if (("" not in current_message) or ("SNAP!!" in current_message)) and ("on" in AFK_.USERAFK_ON):
+    if ("SNAP!!" in current_message) and ("on" in AFK_.USERAFK_ON):
+        #if current_message == "SNAP!!":
+        #    await current_message.delete()
         shite = await event.client.send_message(
             event.chat_id,
-            "`Back alive! No Longer afk.\nWas afk for " + endtime + "`",
+            "`Back alive! No Longer afk.\nWas faking afk for " + endtime + "`",
         )
         AFK_.USERAFK_ON = {}
         AFK_.afk_time = None
@@ -73,7 +76,7 @@ async def set_not_afk(event):
             await event.client.send_message(
                 BOTLOG_CHATID,
                 "#AFKFALSE \n`Set AFK mode to False\n"
-                + "Back alive! No Longer afk.\nWas afk for "
+                + "Back alive! No Longer afk.\nWas faking afk for "
                 + endtime
                 + "`",
             )
@@ -98,40 +101,39 @@ async def on_afk(event):  # sourcery no-metrics
         endtime = ""
         if d > 0:
             endtime += f"{d}d {h}h {m}m {s}s"
+        elif h > 0:
+            endtime += f"{h}h {m}m {s}s"
         else:
-            if h > 0:
-                endtime += f"{h}h {m}m {s}s"
-            else:
-                endtime += f"{m}m {s}s" if m > 0 else f"{s}s"
+            endtime += f"{m}m {s}s" if m > 0 else f"{s}s"
     current_message_text = event.message.message.lower()
-    if "i am hormy" in current_message_text:
+    if "afk" in current_message_text or "#afk" in current_message_text:
         return False
     if not await event.get_sender():
         return
     if AFK_.USERAFK_ON and not (await event.get_sender()).bot:
         msg = None
-        if AFK_.afk_type == "text":
+        if AFK_.afk_type == "media":
+            if AFK_.reason:
+                message_to_reply = (
+                    f"`I am on fake AFK .\n\nActing Since {endtime}\nReason : {AFK_.reason}`"
+                )
+            else:
+                message_to_reply = f"`I am on fake AFK .\n\nActing Since {endtime}\nReason : Not Mentioned ( ಠ ʖ̯ ಠ)`"
+            if event.chat_id:
+                msg = await event.reply(message_to_reply, file=AFK_.media_afk.media)
+        elif AFK_.afk_type == "text":
             if AFK_.msg_link and AFK_.reason:
                 message_to_reply = (
-                    f"**I am AFK .\n\nAFK Since {endtime}\nReason : **{AFK_.reason}"
+                    f"**I am on fake AFK .\n\nActing Since {endtime}\nReason : **{AFK_.reason}"
                 )
             elif AFK_.reason:
                 message_to_reply = (
-                    f"`I am AFK .\n\nAFK Since {endtime}\nReason : {AFK_.reason}`"
+                    f"`I am on fake AFK .\n\nActing Since {endtime}\nReason : {AFK_.reason}`"
                 )
             else:
-                message_to_reply = f"`I am AFK .\n\nAFK Since {endtime}\nReason : Not Mentioned ( ಠ ʖ̯ ಠ)`"
-            if event.chat_id not in Config.UB_BLACK_LIST_CHAT:
+                message_to_reply = f"`I am on fake AFK .\n\nActing Since {endtime}\nReason : Not Mentioned ( ಠ ʖ̯ ಠ)`"
+            if event.chat_id:
                 msg = await event.reply(message_to_reply)
-        elif AFK_.afk_type == "media":
-            if AFK_.reason:
-                message_to_reply = (
-                    f"**I am AFK .\n\nAFK Since {endtime}\nReason :** __{AFK_.reason}__"
-                )
-            else:
-                message_to_reply = f"`I am AFK .\n\nAFK Since {endtime}\nReason : Not Mentioned ( ಠ ʖ̯ ಠ)`"
-            if event.chat_id not in Config.UB_BLACK_LIST_CHAT:
-                msg = await event.reply(message_to_reply, file=AFK_.media_afk.media)
         if event.chat_id in AFK_.last_afk_message:
             await AFK_.last_afk_message[event.chat_id].delete()
         AFK_.last_afk_message[event.chat_id] = msg
@@ -175,8 +177,8 @@ async def on_afk(event):  # sourcery no-metrics
             "{tr}iafk <reason>",
             "{tr}iafk <reason> ; <link>",
         ],
-        "examples": "{tr}iafk Let Me Sleep",
-        "note": "Switches off AFK when you type back `SNAP!!`",
+        "examples": "{tr}afk Let Me Sleep",
+        "note": "Switches off AFK when you type back SNAP!!",
     },
 )
 async def _(event):
@@ -232,10 +234,10 @@ async def _(event):
          AFK mean away from keyboard. Here it supports media unlike afk command",
         "options": "If you want AFK reason with hyperlink use [ ; ] after reason, then paste the media link.",
         "usage": [
-            "{tr}mafk <reason> and reply to media",
+            "{tr}imafk <reason> and reply to media",
         ],
-        "examples": "{tr}mafk Let Me Sleep",
-        "note": "Switches off AFK when you type back `SNAP!!`",
+        "examples": "{tr}imafk Let Me Sleep",
+        "note": "Switches off AFK when you type back SNAP!!",
     },
 )
 async def _(event):

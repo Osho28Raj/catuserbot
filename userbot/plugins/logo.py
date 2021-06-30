@@ -74,6 +74,8 @@ async def very(event):
         gvarstatus("LOGO_FONT")
         or f"https://github.com/Osho28Raj/Files/blob/main/fonts/Streamster.ttf?raw=true"
     )
+    if not os.path.isdir("./temp"):
+        os.mkdir("./temp")
     if not os.path.exists("temp/bg_img.jpg"):
         urllib.request.urlretrieve(LOGO_BACKGROUND, "temp/bg_img.jpg")
     img = Image.open("./temp/bg_img.jpg")

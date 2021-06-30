@@ -17,7 +17,7 @@ from . import BOTLOG, BOTLOG_CHATID, HEROKU_APP
 LOGS = logging.getLogger(__name__)
 plugin_category = "tools"
 
-"""
+#"""
 @catub.cat_cmd(
     pattern="restart$",
     command=("restart", plugin_category),
@@ -53,7 +53,7 @@ async def _(event):
         pass
     except Exception as e:
         LOGS.error(e)
-"""
+#"""
 
 @catub.cat_cmd(
     pattern="shutdown$",
