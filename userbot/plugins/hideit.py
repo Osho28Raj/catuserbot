@@ -15,7 +15,9 @@ plugin_category = "extra"
         "header": "Hides the message via @hideitbot with █",
         "usage": [
             "{tr}hc <text>",
+            "{tr}hc -p <text *hide*> "
         ],
+        "flag":{"-p": "hides words inside **"},
     },
 )
 async def hideit01(event):
@@ -30,8 +32,13 @@ async def hideit01(event):
             event, "__What should I hide through bot? Give some text.__"
         )
     await event.delete()
-    results = await event.client.inline_query(bot, hidetxt)
-    await results[0].click(event.chat_id, reply_to=reply_to_id)
+    if "-p" in hidetxt:
+        hidetxt = hidetxt.replace("-p", "")
+        results = await event.client.inline_query(bot, hidetxt)
+        await results[1].click(event.chat_id, reply_to=reply_to_id)
+    else:
+        results = await event.client.inline_query(bot, hidetxt)
+        await results[0].click(event.chat_id, reply_to=reply_to_id)
 
 
 @catub.cat_cmd(
