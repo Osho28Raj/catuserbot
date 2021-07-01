@@ -59,7 +59,7 @@ async def set_not_afk(event):
             endtime += f"{h}h {m}m {s}s"
         else:
             endtime += f"{m}m {s}s" if m > 0 else f"{s}s"
-    current_message = event.message.message
+    current_message = (event.message.message)
     if ("SNAP!!" in current_message) and ("on" in AFK_.USERAFK_ON):
         await event.delete()
         #if current_message == "SNAP!!":
@@ -80,7 +80,6 @@ async def set_not_afk(event):
                 + endtime
                 + "`",
             )
-
 
 
 @catub.cat_cmd(incoming=True, func=lambda e: bool(e.mentioned or e.is_private))
@@ -165,7 +164,7 @@ async def on_afk(event):  # sourcery no-metrics
                 link_preview=False,
             )
 
-b = "SNAP!!"
+
 @catub.cat_cmd(
     pattern="iafk(?: |$)(.*)",
     command=("iafk", plugin_category),
@@ -179,7 +178,7 @@ b = "SNAP!!"
             "{tr}iafk <reason> ; <link>",
         ],
         "examples": "{tr}iafk Let Me Sleep",
-        "note": ("Switches off AFK when you type back", b.upper())
+        "note": "Switches off AFK when you type back SNAP!!",
     },
 )
 async def _(event):
@@ -202,7 +201,8 @@ async def _(event):
             AFK_.reason = input_str
             AFK_.msg_link = False
         last_seen_status = await event.client(
-            functions.account.GetPrivacyRequest(types.InputPrivacyKeyStatusTimestamp())
+            functions.account.GetPrivacyRequest(
+                types.InputPrivacyKeyStatusTimestamp())
         )
         if isinstance(last_seen_status.rules, types.PrivacyValueAllowAll):
             AFK_.afk_time = datetime.now()
@@ -238,7 +238,7 @@ async def _(event):
             "{tr}imafk <reason> and reply to media",
         ],
         "examples": "{tr}imafk Let Me Sleep",
-        "note": ("Switches off AFK when you type back", b.upper())
+        "note": "Switches off AFK when you type back SNAP!!",
     },
 )
 async def _(event):
@@ -266,7 +266,8 @@ async def _(event):
         input_str = event.pattern_match.group(1)
         AFK_.reason = input_str
         last_seen_status = await event.client(
-            functions.account.GetPrivacyRequest(types.InputPrivacyKeyStatusTimestamp())
+            functions.account.GetPrivacyRequest(
+                types.InputPrivacyKeyStatusTimestamp())
         )
         if isinstance(last_seen_status.rules, types.PrivacyValueAllowAll):
             AFK_.afk_time = datetime.now()
