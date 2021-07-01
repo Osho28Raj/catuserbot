@@ -61,8 +61,8 @@ async def set_not_afk(event):
             endtime += f"{m}m {s}s" if m > 0 else f"{s}s"
     current_message = event.message.message
     if ("SNAP!!" in current_message) and ("on" in AFK_.USERAFK_ON):
+        await event.delete()
         #if current_message == "SNAP!!":
-        #    await current_message.delete()
         shite = await event.client.send_message(
             event.chat_id,
             "`Back alive! No Longer afk.\nWas faking afk for " + endtime + "`",
@@ -80,6 +80,7 @@ async def set_not_afk(event):
                 + endtime
                 + "`",
             )
+
 
 
 @catub.cat_cmd(incoming=True, func=lambda e: bool(e.mentioned or e.is_private))
@@ -164,7 +165,7 @@ async def on_afk(event):  # sourcery no-metrics
                 link_preview=False,
             )
 
-
+b = "SNAP!!"
 @catub.cat_cmd(
     pattern="iafk(?: |$)(.*)",
     command=("iafk", plugin_category),
@@ -177,8 +178,8 @@ async def on_afk(event):  # sourcery no-metrics
             "{tr}iafk <reason>",
             "{tr}iafk <reason> ; <link>",
         ],
-        "examples": "{tr}afk Let Me Sleep",
-        "note": "Switches off AFK when you type back SNAP!!",
+        "examples": "{tr}iafk Let Me Sleep",
+        "note": ("Switches off AFK when you type back", b.upper())
     },
 )
 async def _(event):
@@ -237,7 +238,7 @@ async def _(event):
             "{tr}imafk <reason> and reply to media",
         ],
         "examples": "{tr}imafk Let Me Sleep",
-        "note": "Switches off AFK when you type back SNAP!!",
+        "note": ("Switches off AFK when you type back", b.upper())
     },
 )
 async def _(event):
