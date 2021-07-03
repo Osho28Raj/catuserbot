@@ -28,18 +28,19 @@ async def hideit01(event):
     hidetxt = event.pattern_match.group(1)
     reply_to_id = await reply_id(event)
     if not hidetxt:
-    return await edit_delete(
-        event, "__What should I hide through bot? Give some text.__"
-    )
-    await event.delete()
-    if "-p" in hidetxt:
-        hidetxt = hidetxt.replace("-p", "")
-        if not hidetxt:
         return await edit_delete(
             event, "__What should I hide through bot? Give some text.__"
         )
-        results = await event.client.inline_query(bot, hidetxt)
-        await results[1].click(event.chat_id, reply_to=reply_to_id)
+        await event.delete()
+    if "-p" in hidetxt:
+        hidetxt = hidetxt.replace("-p", "")
+        if not hidetxt:
+            return await edit_delete(
+            event, "__What should I hide through bot? Give some text.__"
+        )
+        else:
+            results = await event.client.inline_query(bot, hidetxt)
+            await results[1].click(event.chat_id, reply_to=reply_to_id)
     else:
         results = await event.client.inline_query(bot, hidetxt)
         await results[0].click(event.chat_id, reply_to=reply_to_id)
