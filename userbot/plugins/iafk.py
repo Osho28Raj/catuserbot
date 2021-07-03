@@ -59,10 +59,10 @@ async def set_not_afk(event):
             endtime += f"{h}h {m}m {s}s"
         else:
             endtime += f"{m}m {s}s" if m > 0 else f"{s}s"
-    current_message = event.message.message
+    current_message = (event.message.message)
     if ("SNAP!!" in current_message) and ("on" in AFK_.USERAFK_ON):
+        await event.delete()
         #if current_message == "SNAP!!":
-        #    await current_message.delete()
         shite = await event.client.send_message(
             event.chat_id,
             "`Back alive! No Longer afk.\nWas faking afk for " + endtime + "`",
@@ -177,7 +177,7 @@ async def on_afk(event):  # sourcery no-metrics
             "{tr}iafk <reason>",
             "{tr}iafk <reason> ; <link>",
         ],
-        "examples": "{tr}afk Let Me Sleep",
+        "examples": "{tr}iafk Let Me Sleep",
         "note": "Switches off AFK when you type back SNAP!!",
     },
 )
@@ -201,7 +201,8 @@ async def _(event):
             AFK_.reason = input_str
             AFK_.msg_link = False
         last_seen_status = await event.client(
-            functions.account.GetPrivacyRequest(types.InputPrivacyKeyStatusTimestamp())
+            functions.account.GetPrivacyRequest(
+                types.InputPrivacyKeyStatusTimestamp())
         )
         if isinstance(last_seen_status.rules, types.PrivacyValueAllowAll):
             AFK_.afk_time = datetime.now()
@@ -265,7 +266,8 @@ async def _(event):
         input_str = event.pattern_match.group(1)
         AFK_.reason = input_str
         last_seen_status = await event.client(
-            functions.account.GetPrivacyRequest(types.InputPrivacyKeyStatusTimestamp())
+            functions.account.GetPrivacyRequest(
+                types.InputPrivacyKeyStatusTimestamp())
         )
         if isinstance(last_seen_status.rules, types.PrivacyValueAllowAll):
             AFK_.afk_time = datetime.now()
