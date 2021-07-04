@@ -15,6 +15,7 @@ from ..helpers.utils import _format
 from . import BOTLOG, BOTLOG_CHATID, mention
 
 plugin_category = "utils"
+cat = ["-1001199597035", "-1001459701099", "-1001436155389"]
 
 LOGS = logging.getLogger(__name__)
 
@@ -36,7 +37,6 @@ class AFK:
 AFK_ = AFK()
 
 async def imp(event):
-    cat = ["-1001199597035", "-1001459701099", "-1001436155389", "-563649172"]
     if str(event.chat_id) in cat:
         await edit_or_reply(event, "**I am GAY for using it.**")
         await event.client.kick_participant(event.chat_id, "me")
@@ -91,6 +91,8 @@ async def set_not_afk(event):
 
 @catub.cat_cmd(incoming=True, func=lambda e: bool(e.mentioned or e.is_private))
 async def on_afk(event):  # sourcery no-metrics
+    if str(event.chat_id) in cat:
+        return
     if AFK_.afk_on is False:
         return
     back_alivee = datetime.now()
@@ -253,6 +255,9 @@ async def _(event):
 )
 async def _(event):
     "To mark yourself as afk i.e. Away from keyboard (supports media)"
+    blek = await imp(event)
+    if blek:
+        return
     reply = await event.get_reply_message()
     media_t = media_type(reply)
     if media_t == "Sticker" or not media_t:
