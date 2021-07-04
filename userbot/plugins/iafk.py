@@ -67,7 +67,7 @@ async def set_not_afk(event):
         else:
             endtime += f"{m}m {s}s" if m > 0 else f"{s}s"
     current_message = (event.message.message)
-    if ("SNAP!!" in current_message) and ("on" in AFK_.USERAFK_ON):
+    if ("SNAP!!" == current_message.upper()) and ("on" in AFK_.USERAFK_ON):
         await event.delete()
         #if current_message == "SNAP!!":
         shite = await event.client.send_message(
