@@ -372,7 +372,7 @@ async def inline_handler(event):  # sourcery no-metrics
                 json.dump(jsondata, open(secret, "w"))
             else:
                 json.dump(newsecret, open(secret, "w"))
-        elif string == ("help" or ""):
+        elif string == "help" or string == "":
             _result = main_menu()
             result = builder.article(
                 title="© CatUserbot Help",
