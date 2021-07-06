@@ -44,24 +44,17 @@ async def amireallyalive(event):
     uptime = await get_readable_time((time.time() - StartTime))
     _, check_sgnirts = check_data_base_heal_th()
     #================================================
-    # credit taking time😂
-    # random anime quote by [http://t.me/o_s_h_o_r_a_j]
     api_url = f"https://animechan.vercel.app/api/random"
     try:
         response = requests.get(api_url).json()
     except Exception:
         response = None
     quote = response["quote"]
-    """
-    error = "You rise with the moon. I rise with the sun."
-    if error in quote:
-        try:
-            response = requests.get(api_url).json()
-        except Exception:
-            response = None
-    """
-    quote = response["quote"]
     name = response["character"]
+    while len(quote) > 169:
+        res = requests.get(api_url).json()
+        quote = res["quote"]
+        name = res["character"]
     ANIME_QUOTE = f"{quote}\n                    -{name}"
     #================================================
     EMOJI = gvarstatus("ALIVE_EMOJI") or "✘"
