@@ -1,15 +1,14 @@
 # CatUserbot
 A simple Telegram userbot based on Telethon .
+
 [![catuserbot logo](https://telegra.ph/file/b7dc845e3a48cde0d7bb1.jpg)](https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fsandy1709%2Fcatuserbot%2Ftree%2Fbugs&template=https%3A%2F%2Fgithub.com%2Fsandy1709%2Fcatuserbot)
+
 ![Hits](https://hitcounter.pythonanywhere.com/count/tag.svg?url=https%3A%2F%2Fgithub.com%2FOsho28Raj%2Fcatuserbot)
 [![GitHub license](https://img.shields.io/github/license/Osho28Raj/catuserbot?&style=flat-square&logo=github)](https://github.com/Osho28Raj/catuserbot/blob/master/LICENSE)
-[![GitHub contributors](https://img.shields.io/github/contributors/sandy1709/catuserbot?&style=flat-square&logo=github)]
 [![GitHub forks](https://img.shields.io/github/forks/Osho28Raj/catuserbot?&style=flat-square&logo=github)](https://github.com/Osho28Raj/catuserbot/fork)
 [![GitHub stars](https://img.shields.io/github/stars/Osho28Raj/catuserbot?&style=flat-square&logo=github)](https://github.com/Osho28Raj/catuserbot/stargazers)
 
 
-
-A simple Telegram userbot based on Telethon .
 
 ## How to deploy catuserbot
 ### Self host
