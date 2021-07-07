@@ -31,7 +31,7 @@ async def hideit01(event):
         return await edit_delete(
             event, "__What should I hide through bot? Give some text.__"
         )
-        await event.delete()
+    await event.delete()
     if "-p" in hidetxt:
         hidetxt = hidetxt.replace("-p", "")
         if not hidetxt:
