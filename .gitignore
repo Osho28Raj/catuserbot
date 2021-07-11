@@ -104,3 +104,5 @@ config.py
 
 # mypy
 .mypy_cache/
+.vscode/settings.json
+CatUB.session.sql
