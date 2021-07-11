@@ -54,9 +54,6 @@ def ibuild_keyboard(buttons):
 
 
 def main_menu():
-    help_photo = types.InputWebDocument(
-        url=HELP_IMG, size=0, mime_type="image/jpeg", attributes=[])
-    content = help_photo
     text = f"𝗖𝗮𝘁𝗨𝘀𝗲𝗿𝗯𝗼𝘁 𝗛𝗲𝗹𝗽𝗲𝗿\
         \n𝗣𝗿𝗼𝘃𝗶𝗱𝗲𝗱 𝗯𝘆 {mention}"
     buttons = [
@@ -113,7 +110,7 @@ def main_menu():
             ),
         ),
     ]
-    return text, buttons, content
+    return text, buttons
 
 
 def command_in_category(cname):
@@ -378,9 +375,14 @@ async def inline_handler(event):  # sourcery no-metrics
                 json.dump(newsecret, open(secret, "w"))
         elif string == "help" or string == "":
             _result = main_menu()
+            help_photo = types.InputWebDocument(
+            url=HELP_IMG, size=0, mime_type="image/jpeg", attributes=[]
+            )
             result = builder.article(
                 title="© CatUserbot Help",
                 description="Help menu for CatUserbot",
+                content=help_photo,
+                thumb=help_photo,
                 text=_result[0],
                 buttons=_result[1],
                 link_preview=False,
