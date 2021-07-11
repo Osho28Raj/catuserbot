@@ -31,7 +31,6 @@ LOGS = logging.getLogger(__name__)
 
 BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>)")
 CATLOGO = os.environ.get("INLINE_PIC") or "https://telegra.ph/file/493268c1f5ebedc967eba.jpg"
-HELP_IMG = os.environ.get("HELP_PIC") or "https://telegra.ph/file/493268c1f5ebedc967eba.jpg"
 tr = Config.COMMAND_HAND_LER
 
 
@@ -375,14 +374,9 @@ async def inline_handler(event):  # sourcery no-metrics
                 json.dump(newsecret, open(secret, "w"))
         elif string == "help" or string == "":
             _result = main_menu()
-            help_photo = types.InputWebDocument(
-            url=HELP_IMG, size=0, mime_type="image/jpeg", attributes=[]
-            )
             result = builder.article(
                 title="© CatUserbot Help",
                 description="Help menu for CatUserbot",
-                content=help_photo,
-                thumb=help_photo,
                 text=_result[0],
                 buttons=_result[1],
                 link_preview=False,
