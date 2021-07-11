@@ -377,11 +377,11 @@ async def inline_handler(event):  # sourcery no-metrics
             _result = main_menu()
             result = builder.photo(
                 HELP_IMG,
-                title="© CatUserbot Help",
-                description="Help menu for CatUserbot",
+                #title="© CatUserbot Help",
+                #description="Help menu for CatUserbot",
                 text=_result[0],
                 buttons=_result[1],
-                link_preview=False,
+                #link_preview=True,
             )
             await event.answer([result] if result else None)
         elif str_y[0].lower() == "ytdl" and len(str_y) == 2:
