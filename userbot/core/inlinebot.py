@@ -376,8 +376,7 @@ async def inline_handler(event):  # sourcery no-metrics
         elif string == "help" or string == "":
             _result = main_menu()
             result = builder.photo(
-                content=HELP_IMG,
-                thumb=HELP_IMG,
+                HELP_IMG
                 title="© CatUserbot Help",
                 description="Help menu for CatUserbot",
                 text=_result[0],
