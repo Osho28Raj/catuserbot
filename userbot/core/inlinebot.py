@@ -31,6 +31,7 @@ LOGS = logging.getLogger(__name__)
 
 BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>)")
 CATLOGO = os.environ.get("INLINE_PIC") or "https://telegra.ph/file/493268c1f5ebedc967eba.jpg"
+HELP_IMG = os.environ.get("HELP_PIC") or "https://telegra.ph/file/493268c1f5ebedc967eba.jpg"
 tr = Config.COMMAND_HAND_LER
 
 
@@ -53,6 +54,7 @@ def ibuild_keyboard(buttons):
 
 
 def main_menu():
+    HELP_IMG,
     text = f"𝗖𝗮𝘁𝗨𝘀𝗲𝗿𝗯𝗼𝘁 𝗛𝗲𝗹𝗽𝗲𝗿\
         \n𝗣𝗿𝗼𝘃𝗶𝗱𝗲𝗱 𝗯𝘆 {mention}"
     buttons = [
@@ -374,7 +376,8 @@ async def inline_handler(event):  # sourcery no-metrics
                 json.dump(newsecret, open(secret, "w"))
         elif string == "help" or string == "":
             _result = main_menu()
-            result = builder.article(
+            result = builder.photo(
+                HELP_IMG,
                 title="© CatUserbot Help",
                 description="Help menu for CatUserbot",
                 text=_result[0],
