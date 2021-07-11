@@ -54,7 +54,6 @@ def ibuild_keyboard(buttons):
 
 
 def main_menu():
-    #photo=HELP_IMG
     text = f"𝗖𝗮𝘁𝗨𝘀𝗲𝗿𝗯𝗼𝘁 𝗛𝗲𝗹𝗽𝗲𝗿\
         \n𝗣𝗿𝗼𝘃𝗶𝗱𝗲𝗱 𝗯𝘆 {mention}"
     buttons = [
@@ -111,7 +110,7 @@ def main_menu():
             ),
         ),
     ]
-    return text, buttons, photo
+    return text, buttons
 
 
 def command_in_category(cname):
@@ -377,7 +376,8 @@ async def inline_handler(event):  # sourcery no-metrics
         elif string == "help" or string == "":
             _result = main_menu()
             result = builder.photo(
-                HELP_IMG,
+                content=HELP_IMG,
+                thumb=HELP_IMG,
                 title="© CatUserbot Help",
                 description="Help menu for CatUserbot",
                 text=_result[0],
