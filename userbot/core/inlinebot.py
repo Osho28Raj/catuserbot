@@ -31,7 +31,6 @@ LOGS = logging.getLogger(__name__)
 
 BTN_URL_REGEX = re.compile(r"(\[([^\[]+?)\]\<buttonurl:(?:/{0,2})(.+?)(:same)?\>)")
 CATLOGO = os.environ.get("INLINE_PIC") or "https://telegra.ph/file/493268c1f5ebedc967eba.jpg"
-HELP_PIC = os.environ.get("HELP_PIC")
 tr = Config.COMMAND_HAND_LER
 
 
@@ -375,6 +374,7 @@ async def inline_handler(event):  # sourcery no-metrics
                 json.dump(newsecret, open(secret, "w"))
         elif string == "help" or string == "":
             _result = main_menu()
+            HELP_PIC = gvarstatus("HELP_PIC")
             if HELP_PIC:
                 result = builder.photo(
                     HELP_PIC,
