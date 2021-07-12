@@ -106,3 +106,4 @@ config.py
 .mypy_cache/
 .vscode/settings.json
 CatUB.session.sql
+userbot/useless.pgsql
