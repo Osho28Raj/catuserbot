@@ -1,3 +1,4 @@
+from userbot.core.events import edit_message
 from validators.url import url
 
 from userbot import catub
@@ -6,10 +7,21 @@ from userbot.core.logger import logging
 from ..Config import Config
 from ..core.managers import edit_delete, edit_or_reply
 from ..sql_helper.globals import addgvar, delgvar, gvarstatus
+from telegraph import Telegraph, upload_file, exceptions
+from PIL import Image
 
 plugin_category = "utils"
 LOGS = logging.getLogger(__name__)
 cmdhd = Config.COMMAND_HAND_LER
+
+telegraph = Telegraph()
+r = telegraph.create_account(short_name=Config.TELEGRAPH_SHORT_NAME)
+auth_url = r["auth_url"]
+
+def resize_image(image):
+    im = Image.open(image)
+    im.save(image, "PNG")
+
 vlist = [
     "ALIVE_PIC",
     "ALIVE_EMOJI",
@@ -75,12 +87,24 @@ async def bad(event):  # sourcery no-metrics
         vname, vinfo = vname.split(" ", 1)
     reply = await event.get_reply_message()
     if not vinfo and reply:
-        vinfo = reply.text
+        await event.edit("`Creating link...`")
+        downloaded_file_name = await event.client.download_media(reply, Config.TEMP_DIR)
+        try:
+            if downloaded_file_name.endswith((".webp")):
+                resize_image(downloaded_file_name)
+        except AttributeError:
+            return await edit_delete(event, "**Error** : `No media found`")
+        try:
+            media_urls = upload_file(downloaded_file_name)
+        except exceptions.TelegraphException as exc:
+            return await event.edit(f"**Error** : `{str(exc)}`")
+        vinfo = reply.text or f"https://telegra.ph{media_urls[0]}"
     if vname in vlist:
         if vname in oldvars:
             vname = oldvars[vname]
         if cmd == "set":
-            if not vinfo:
+            reply = await event.get_reply_message()
+            if not (vinfo and reply):
                 return await edit_delete(
                     event, f"Give some values which you want to save for **{vname}**"
                 )
