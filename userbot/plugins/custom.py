@@ -93,18 +93,18 @@ async def bad(event):  # sourcery no-metrics
             if downloaded_file_name.endswith((".webp")):
                 resize_image(downloaded_file_name)
         except AttributeError:
-            return await edit_delete(event, "**Error** : `No media found`")
+            vinfo = reply.text
         try:
             media_urls = upload_file(downloaded_file_name)
         except exceptions.TelegraphException as exc:
             return await event.edit(f"**Error** : `{str(exc)}`")
-        vinfo = reply.text or f"https://telegra.ph{media_urls[0]}"
+        vinfo = f"https://telegra.ph{media_urls[0]}"
     if vname in vlist:
         if vname in oldvars:
             vname = oldvars[vname]
         if cmd == "set":
             reply = await event.get_reply_message()
-            if not (vinfo and reply):
+            if not vinfo:
                 return await edit_delete(
                     event, f"Give some values which you want to save for **{vname}**"
                 )
