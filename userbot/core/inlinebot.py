@@ -270,12 +270,13 @@ async def inline_handler(event):  # sourcery no-metrics
                 I_IMG = random.choice(PIC)
             elif not IALIVE_PIC and not ALIVE_PIC:
                 I_IMG = None
-            if I_IMG and I_IMG.endswith((".jpg", ".png")):
-                result = builder.photo(
+            if I_IMG:
+                result = builder.file(
                     I_IMG,
                     text=query,
                     buttons=buttons,
                 )
+            """
             elif I_IMG:
                 result = builder.document(
                     I_IMG,
@@ -283,6 +284,7 @@ async def inline_handler(event):  # sourcery no-metrics
                     text=query,
                     buttons=buttons,
                 )
+            """
             else:
                 result = builder.article(
                     title="Alive cat",
