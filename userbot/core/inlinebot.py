@@ -374,13 +374,29 @@ async def inline_handler(event):  # sourcery no-metrics
                 json.dump(newsecret, open(secret, "w"))
         elif string == "help" or string == "":
             _result = main_menu()
-            result = builder.article(
-                title="© CatUserbot Help",
-                description="Help menu for CatUserbot",
-                text=_result[0],
-                buttons=_result[1],
-                link_preview=False,
-            )
+            HELP_PIC = gvarstatus("HELP_PIC")
+            if HELP_PIC and HELP_PIC.endswith((".jpg", ".jpeg", ".png")):
+                result = builder.photo(
+                    HELP_PIC,
+                    #title="Help Menu",
+                    text=_result[0],
+                    buttons=_result[1],
+                )
+            elif HELP_PIC:
+                result = builder.document(
+                    HELP_PIC,
+                    title="Help Menu",
+                    text=_result[0],
+                    buttons=_result[1],
+                )
+            else:
+                result = builder.article(
+                    title="© CatUserbot Help",
+                    description="Help menu for CatUserbot",
+                    text=_result[0],
+                    buttons=_result[1],
+                    link_preview=True,
+                )
             await event.answer([result] if result else None)
         elif str_y[0].lower() == "ytdl" and len(str_y) == 2:
             link = get_yt_video_id(str_y[1].strip())
