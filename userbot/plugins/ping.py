@@ -146,7 +146,7 @@ async def _(event):
     command=("mping", plugin_category),
     info={
         "header": "Checks the latency of userbot from the server, with a media",
-        "option": "VARS to customize the texts of mping\nPING_PICS add mutiple telegraph media link separated by spaces.\nPING_TEXT Pre text i.e. before calculation ping.\nPONG_TEXT Post text i.e. the final message.\nPING_MENTION Custom mention line.\nPING_PARTNER Text after ping(that random number)\nAVG_TEXT Custom header in `.ping -a`",
+        "option": "VARS to customize the texts of mping\nPING_PICS add mutiple telegraph media link separated by spaces(in database).\nPING_TEXT Pre text i.e. before calculation ping.\nPONG_TEXT Post text i.e. the final message.\nPING_MENTION Custom mention line.\nPING_PARTNER Text after ping(that random number)\nAVG_TEXT Custom header in `.ping -a`",
         "usage": "{tr}mping",
     },
 )
