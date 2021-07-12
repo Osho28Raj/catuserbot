@@ -271,20 +271,10 @@ async def inline_handler(event):  # sourcery no-metrics
             elif not IALIVE_PIC and not ALIVE_PIC:
                 I_IMG = None
             if I_IMG:
-                result = builder.file(
-                    I_IMG,
-                    text=query,
-                    buttons=buttons,
-                )
-            """
-            elif I_IMG:
                 result = builder.document(
                     I_IMG,
-                    title="Alive cat",
                     text=query,
                     buttons=buttons,
-                )
-            """
             else:
                 result = builder.article(
                     title="Alive cat",
@@ -377,7 +367,7 @@ async def inline_handler(event):  # sourcery no-metrics
         elif string == "help" or string == "":
             _result = main_menu()
             HELP_PIC = gvarstatus("HELP_PIC")
-            if HELP_PIC and HELP_PIC.endswith((".jpg", ".png")):
+            if HELP_IMG and HELP_IMG.endswith((".jpg", ".jpeg", ".png")):
                 result = builder.photo(
                     HELP_PIC,
                     text=_result[0],
@@ -386,6 +376,7 @@ async def inline_handler(event):  # sourcery no-metrics
             elif HELP_PIC:
                 result = builder.document(
                     HELP_PIC,
+                    title="Help Menu"
                     text=_result[0],
                     buttons=_result[1],
                 )
